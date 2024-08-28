@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import AddTodo from './AddTodo';
-import TodoList from './TodoList.tsx';
+import TodoList from './TodoList';
 
 interface Task {
   text: string;
@@ -13,6 +13,19 @@ interface Task {
 function App() {
   const [count, setCount] = useState(0);
   const [tasks, setTasks] = useState<Task[]>([]);
+
+  // Charger les tâches depuis le local storage lors du montage
+  useEffect(() => {
+    const storedTasks = localStorage.getItem('tasks');
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  // Sauvegarder les tâches dans le local storage à chaque changement
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = (text: string) => {
     setTasks([...tasks, { text, completed: false }]);
