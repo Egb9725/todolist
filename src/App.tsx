@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { useState } from 'react';
+// import reactLogo from './assets/react.svg';
+// import viteLogo from '/vite.svg';
 import './App.css';
 import AddTodo from './AddTodo';
-import TodoList from './TodoList';
+import TodoList from './TodoList.tsx';
 
 interface Task {
   text: string;
@@ -11,21 +11,8 @@ interface Task {
 }
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [tasks, setTasks] = useState<Task[]>([]);
-
-  // Charger les tâches depuis le local storage lors du montage
-  useEffect(() => {
-    const storedTasks = localStorage.getItem('tasks');
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
-
-  // Sauvegarder les tâches dans le local storage à chaque changement
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
 
   const addTask = (text: string) => {
     setTasks([...tasks, { text, completed: false }]);
@@ -43,7 +30,7 @@ function App() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -62,7 +49,7 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
+      </p> */}
 
       <div style={{ marginTop: '2rem' }}>
         <h2>Todo App</h2>
